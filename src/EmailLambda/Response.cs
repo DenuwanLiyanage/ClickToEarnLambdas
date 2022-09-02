@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace HelloWorld;
+namespace EmailLambda;
 
 public class Response
 {

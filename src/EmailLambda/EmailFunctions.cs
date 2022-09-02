@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Amazon.SimpleEmail;
 using Amazon.SimpleEmail.Model;
 
-namespace HelloWorld;
+namespace EmailLambda;
 
 public interface IEmailFunctions
 {
