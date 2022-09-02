@@ -1,6 +1,6 @@
 using Amazon.DynamoDBv2.DataModel;
 
-namespace HelloWorld;
+namespace GameLambda;
 
 [DynamoDBTable("user-click-count-table")]
 public class ClickCount

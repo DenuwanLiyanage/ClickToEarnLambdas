@@ -12,7 +12,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(DefaultLambdaJsonSerializer))]
 
-namespace HelloWorld
+namespace GameLambda
 {
 
     public class Function

@@ -1,4 +1,4 @@
-namespace HelloWorld;
+namespace GameLambda;
 
 public class GetMatchWinnerResponse
 {
