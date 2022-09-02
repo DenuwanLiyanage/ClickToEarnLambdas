@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailLambda", "src\EmailLam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountLambda", "src\AccountLambda\AccountLambda.csproj", "{583EFB99-BE54-4009-B70B-A07C4E135E4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "src\HelloWorld\HelloWorld.csproj", "{C3A746B5-6ED0-4594-A4E8-128B03A49FF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{583EFB99-BE54-4009-B70B-A07C4E135E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{583EFB99-BE54-4009-B70B-A07C4E135E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{583EFB99-BE54-4009-B70B-A07C4E135E4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3A746B5-6ED0-4594-A4E8-128B03A49FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3A746B5-6ED0-4594-A4E8-128B03A49FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3A746B5-6ED0-4594-A4E8-128B03A49FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3A746B5-6ED0-4594-A4E8-128B03A49FF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
