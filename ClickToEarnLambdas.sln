@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailLambda", "src\EmailLam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountLambda", "src\AccountLambda\AccountLambda.csproj", "{583EFB99-BE54-4009-B70B-A07C4E135E4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "src\HelloWorld\HelloWorld.csproj", "{C3A746B5-6ED0-4594-A4E8-128B03A49FF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EconomyLambda", "src\EconomyLambda\EconomyLambda.csproj", "{C3A746B5-6ED0-4594-A4E8-128B03A49FF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
