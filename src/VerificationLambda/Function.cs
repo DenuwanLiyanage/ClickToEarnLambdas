@@ -1,30 +1,32 @@
+using System;
 using System.Threading.Tasks;
-using Amazon;
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
-using Amazon.SimpleEmail;
 using Newtonsoft.Json;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
 
-namespace EmailLambda
+namespace VerificationLambda
 {
-
     public class Function
     {
         public async Task<APIGatewayProxyResponse> FunctionHandler(APIGatewayProxyRequest input, ILambdaContext context)
         {
-            var emailFunctions = new EmailFunctions(new AmazonSimpleEmailServiceClient(RegionEndpoint.USWest2));
+            Console.WriteLine(JsonConvert.SerializeObject(input));
+            var emailFunctions = new VerificationFunctions(new DynamoDBContext(new AmazonDynamoDBClient()));
 
             Response response = new Response();
 
-            var resp = await emailFunctions.SendAnEmailAsync("denuwan.sds@gmail.com", "Verify", "ver");
-            
+            var walletAddress = input.QueryStringParameters["walletAddress"];
+            var resp = await emailFunctions.VerifyWalletAddressAsync(walletAddress);
+
             return new APIGatewayProxyResponse
             {
                 StatusCode = 200,
-                Body = JsonConvert.SerializeObject(response)
+                Body = JsonConvert.SerializeObject(resp)
             };
         }
     }

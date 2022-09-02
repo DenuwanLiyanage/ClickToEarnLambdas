@@ -9,11 +9,11 @@ Globals:
     Timeout: 10
 
 Resources:
-  EmailLambda:
+  VerificationLambda:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: ./src/EmailLambda/
-      Handler: EmailLambda::EmailLambda.Function::FunctionHandler
+      CodeUri: ./src/VerificationLambda/
+      Handler: VerificationLambda::VerificationLambda.Function::FunctionHandler
       Runtime: dotnet6
       Architectures:
         - x86_64
@@ -21,12 +21,26 @@ Resources:
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           PARAM1: VALUE
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - arn:aws:iam::573507721656:policy/CloudsWatch-Logs
+        - arn:aws:iam::573507721656:policy/gameLiftPolicy
+        - arn:aws:iam::573507721656:policy/NewPersonalDynamoPolicy
+        - arn:aws:iam::573507721656:policy/InvokeLambdaUnity
+        - arn:aws:iam::573507721656:policy/ses
       Events:
-        EmailLambda:
+        VerificationLambdaApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /verify
             Method: get
+            RequestParameters:
+              - method.request.querystring.userId:
+                  Required: true
+                  Caching: false
+              - method.request.querystring.walletAddress:
+                  Required: true
+                  Caching: false
             
   AccountLambda:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -40,8 +54,15 @@ Resources:
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           PARAM1: VALUE
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - arn:aws:iam::573507721656:policy/CloudsWatch-Logs
+        - arn:aws:iam::573507721656:policy/gameLiftPolicy
+        - arn:aws:iam::573507721656:policy/NewPersonalDynamoPolicy
+        - arn:aws:iam::573507721656:policy/InvokeLambdaUnity
+        - arn:aws:iam::573507721656:policy/ses
       Events:
-        AccountLambda:
+        AccountLambdaApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /account
@@ -59,8 +80,15 @@ Resources:
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           PARAM1: VALUE
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - arn:aws:iam::573507721656:policy/CloudsWatch-Logs
+        - arn:aws:iam::573507721656:policy/gameLiftPolicy
+        - arn:aws:iam::573507721656:policy/NewPersonalDynamoPolicy
+        - arn:aws:iam::573507721656:policy/InvokeLambdaUnity
+        - arn:aws:iam::573507721656:policy/ses
       Events:
-        EconomyLambda:
+        EconomyLambdaApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /economy
@@ -78,8 +106,15 @@ Resources:
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           PARAM1: VALUE
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - arn:aws:iam::573507721656:policy/CloudsWatch-Logs
+        - arn:aws:iam::573507721656:policy/gameLiftPolicy
+        - arn:aws:iam::573507721656:policy/NewPersonalDynamoPolicy
+        - arn:aws:iam::573507721656:policy/InvokeLambdaUnity
+        - arn:aws:iam::573507721656:policy/ses
       Events:
-        GameLambda:
+        GameLambdaApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /game
@@ -94,7 +129,7 @@ Outputs:
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
   EmailLambda:
     Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt EmailLambda.Arn
+    Value: !GetAtt VerificationLambda.Arn
   EmailLambdaIamRole:
     Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt EmailLambdaRole.Arn
+    Value: !GetAtt VerificationLambdaRole.Arn

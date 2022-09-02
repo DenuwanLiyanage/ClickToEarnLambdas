@@ -1,11 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.Serialization.SystemTextJson;
+using Amazon.SimpleEmail;
 using Newtonsoft.Json;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
@@ -18,7 +19,8 @@ namespace AccountLambda
         public async Task<APIGatewayProxyResponse> FunctionHandler(APIGatewayProxyRequest input, ILambdaContext context)
         {
             var dynamo = new AmazonDynamoDBClient();
-            var accountFunctions = new AccountFunctions(new DynamoDBContext(dynamo));
+            var accountFunctions = new AccountFunctions(new AmazonSimpleEmailServiceClient(RegionEndpoint.USWest2),
+                new DynamoDBContext(dynamo));
             Response response = new Response();
 
             var jsonInput = JsonConvert.DeserializeObject<Request>(input.Body);
@@ -38,6 +40,10 @@ namespace AccountLambda
                     var request = JsonConvert.DeserializeObject<AddWalletRequest>(jsonInput.values);
                     await accountFunctions.AddNewWalletToAccountAsync(request?.userId, request?.walletAddress);
                     var accounts = await accountFunctions.GetWalletsByUserIdAsync(request?.userId);
+                    var body =
+                        $"https://hjjujamzwa.execute-api.us-west-2.amazonaws.com/test-stage/verify?userId={request?.userId}&walletAddress={request?.walletAddress}";
+                    var emailResponse = await accountFunctions.SendAnEmailAsync(body);
+                    Console.WriteLine(emailResponse);
                     response = new Response { userId = accounts.userId, wallets = accounts.wallets };
                     break;
                 }
@@ -48,20 +54,11 @@ namespace AccountLambda
                     response = new Response { userId = unVerifiedWallets.userId, wallets = unVerifiedWallets.wallets };
                     break;
                 }
-                case OpCodesForLambda.VerifyWallet:
-                {
-                    var request = JsonConvert.DeserializeObject<VerifyWalletRequest>(jsonInput.values);
-                    var verifiedWallet = await accountFunctions.VerifyWalletAddressAsync(request?.walletAddress);
-                    var walletList = new List<string>();
-                    walletList.Add(verifiedWallet.wallet);
-                    response = new Response { userId = verifiedWallet.userId, wallets = walletList };
-                    break;
-                }
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            //await accountFunctions.AddNewWalletToAccountAsync("2", "777");
 
             LambdaLogger.Log("output: " + JsonConvert.SerializeObject(response));
             return new APIGatewayProxyResponse

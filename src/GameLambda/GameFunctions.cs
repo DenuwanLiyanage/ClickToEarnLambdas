@@ -12,7 +12,7 @@ public class GameFunctions
     {
         _contextDb = contextDb;
     }
-    
+
     public async Task<ClickCountSubmitResponse> SubmitClickCount(ClickCountSubmitRequest clickCountSubmitRequest)
     {
         var playersForSession = await GetNoOfPlayersForSession(clickCountSubmitRequest.sessionId);
@@ -43,12 +43,13 @@ public class GameFunctions
                 submitResponse.status = "Click count submitted";
                 break;
         }
+
         return submitResponse;
     }
 
     private async Task<int> GetNoOfPlayersForSession(string sessionId)
     {
-        var productsTask = await _contextDb.QueryAsync<ClickCount>(sessionId,new DynamoDBOperationConfig
+        var productsTask = await _contextDb.QueryAsync<ClickCount>(sessionId, new DynamoDBOperationConfig
         {
             ConditionalOperator = ConditionalOperatorValues.And
         }).GetRemainingAsync();
@@ -58,7 +59,7 @@ public class GameFunctions
 
     public async Task<string> GetWinner(string sessionId)
     {
-        var productsTask = await _contextDb.QueryAsync<ClickCount>(sessionId,new DynamoDBOperationConfig
+        var productsTask = await _contextDb.QueryAsync<ClickCount>(sessionId, new DynamoDBOperationConfig
         {
             ConditionalOperator = ConditionalOperatorValues.And
         }).GetRemainingAsync();
@@ -69,6 +70,7 @@ public class GameFunctions
             winner = "Match not ended yet";
             return winner;
         }
+
         var player1Count = productsTask[0].count;
         var player2Count = productsTask[1].count;
 
@@ -77,6 +79,7 @@ public class GameFunctions
             winner = "Both";
             return winner;
         }
+
         winner = player1Count > player2Count ? productsTask[0].userId : productsTask[1].userId;
         return winner;
     }
