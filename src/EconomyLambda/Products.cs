@@ -1,6 +1,6 @@
 using Amazon.DynamoDBv2.DataModel;
 
-namespace HelloWorld;
+namespace EconomyLambda;
 
 [DynamoDBTable("product-table")]
 public class Products

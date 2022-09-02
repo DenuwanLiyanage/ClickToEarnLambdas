@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using WavesCS;
 
-namespace HelloWorld
+namespace EconomyLambda
 {
     public class WavesGateway 
     {

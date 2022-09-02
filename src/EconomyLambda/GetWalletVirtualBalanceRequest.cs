@@ -1,4 +1,4 @@
-namespace HelloWorld;
+namespace EconomyLambda;
 
 public class GetWalletVirtualBalanceRequest
 {

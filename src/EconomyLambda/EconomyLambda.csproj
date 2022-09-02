@@ -4,7 +4,6 @@
     <TargetFramework>net6.0</TargetFramework>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <AWSProjectType>Lambda</AWSProjectType>
-    <RootNamespace>HelloWorld</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
