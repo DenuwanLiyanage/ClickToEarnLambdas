@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "src\HelloWorld\HelloWorld.csproj", "{1C90F7F0-DCAD-42FB-9FB9-DE5BFBDEA519}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailLambda", "src\EmailLambda\EmailLambda.csproj", "{1C90F7F0-DCAD-42FB-9FB9-DE5BFBDEA519}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
