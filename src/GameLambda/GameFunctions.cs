@@ -57,7 +57,7 @@ public class GameFunctions
         return productsTask.Count;
     }
 
-    public async Task<string> GetWinner(string sessionId)
+    public async Task<GetMatchWinnerResponse> GetWinner(string sessionId)
     {
         var productsTask = await _contextDb.QueryAsync<ClickCount>(sessionId, new DynamoDBOperationConfig
         {
@@ -65,10 +65,15 @@ public class GameFunctions
         }).GetRemainingAsync();
 
         var winner = "";
+        var count = 0;
         if (productsTask.Count != 2)
         {
             winner = "Match not ended yet";
-            return winner;
+            return new GetMatchWinnerResponse
+            {
+                userId = winner,
+                count = count
+            };
         }
 
         var player1Count = productsTask[0].count;
@@ -77,10 +82,33 @@ public class GameFunctions
         if (player1Count == player2Count)
         {
             winner = "Both";
-            return winner;
+            count = player1Count;
+            return new GetMatchWinnerResponse
+            {
+                userId = winner,
+                count = count
+            };
         }
 
         winner = player1Count > player2Count ? productsTask[0].userId : productsTask[1].userId;
-        return winner;
+        count = player1Count > player2Count ? player1Count : player2Count;
+
+        var winnerResponse = new GetMatchWinnerResponse
+        {
+            userId = winner,
+            count = count
+        };
+        return winnerResponse;
+    }
+
+    public async Task<VirtualBalance> AddRewards(string userId, decimal rewards)
+    {
+        var virtualBalance = await _contextDb.LoadAsync<VirtualBalance>(userId);
+        var balance = virtualBalance.balance;
+        balance += rewards;
+        virtualBalance.balance = balance;
+
+        await _contextDb.SaveAsync(virtualBalance);
+        return virtualBalance;
     }
 }

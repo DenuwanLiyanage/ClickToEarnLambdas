@@ -14,7 +14,6 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace GameLambda
 {
-
     public class Function
     {
         public async Task<APIGatewayProxyResponse> FunctionHandler(APIGatewayProxyRequest input, ILambdaContext context)
@@ -26,7 +25,7 @@ namespace GameLambda
 
             var response = new Response();
 
-            
+
             switch (jsonInput?.opCodes)
             {
                 case OpCodesForLambda.SubmitClickCount:
@@ -40,7 +39,9 @@ namespace GameLambda
                 {
                     var request = JsonConvert.DeserializeObject<GetMatchWinnerRequest>(jsonInput.values);
                     var clickCountSubmitResponse = await gameFunctions.GetWinner(request?.sessionId);
-                    response.response = clickCountSubmitResponse;
+                    var winnerBalance = await gameFunctions.AddRewards(clickCountSubmitResponse.userId,
+                        clickCountSubmitResponse.count);
+                    response.response = JsonConvert.SerializeObject(clickCountSubmitResponse);
                     break;
                 }
                 default:

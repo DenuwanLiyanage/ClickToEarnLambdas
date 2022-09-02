@@ -1,6 +1,6 @@
 using Amazon.DynamoDBv2.DataModel;
 
-namespace EconomyLambda;
+namespace GameLambda;
 
 [DynamoDBTable("virtual-balance-table")]
 public class VirtualBalance
