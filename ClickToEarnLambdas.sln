@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailLambda", "src\EmailLambda\EmailLambda.csproj", "{1C90F7F0-DCAD-42FB-9FB9-DE5BFBDEA519}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "src\HelloWorld\HelloWorld.csproj", "{583EFB99-BE54-4009-B70B-A07C4E135E4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{1C90F7F0-DCAD-42FB-9FB9-DE5BFBDEA519}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C90F7F0-DCAD-42FB-9FB9-DE5BFBDEA519}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C90F7F0-DCAD-42FB-9FB9-DE5BFBDEA519}.Release|Any CPU.Build.0 = Release|Any CPU
+		{583EFB99-BE54-4009-B70B-A07C4E135E4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{583EFB99-BE54-4009-B70B-A07C4E135E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{583EFB99-BE54-4009-B70B-A07C4E135E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{583EFB99-BE54-4009-B70B-A07C4E135E4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
