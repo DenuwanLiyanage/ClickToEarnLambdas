@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountLambda", "src\Accoun
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EconomyLambda", "src\EconomyLambda\EconomyLambda.csproj", "{C3A746B5-6ED0-4594-A4E8-128B03A49FF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "src\HelloWorld\HelloWorld.csproj", "{B3A0EC14-B324-4D43-BC71-381B24FA1CC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLambda", "src\GameLambda\GameLambda.csproj", "{B3A0EC14-B324-4D43-BC71-381B24FA1CC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
