@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(DefaultLambdaJsonSerializer))]
 
-namespace HelloWorld
+namespace AccountLambda
 {
     public class Function
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace HelloWorld;
+namespace AccountLambda;
 
 public class Response
 {

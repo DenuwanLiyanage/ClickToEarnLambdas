@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2.DataModel;
 
-namespace HelloWorld;
+namespace AccountLambda;
 
 public interface ICountFunctions
 {

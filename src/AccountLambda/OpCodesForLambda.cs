@@ -1,4 +1,4 @@
-namespace HelloWorld;
+namespace AccountLambda;
 
 public enum OpCodesForLambda
 {

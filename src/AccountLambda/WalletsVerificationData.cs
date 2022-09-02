@@ -1,6 +1,6 @@
 using Amazon.DynamoDBv2.DataModel;
 
-namespace HelloWorld;
+namespace AccountLambda;
 
 [DynamoDBTable("wallet-verification-info-table")]
 public class WalletsVerificationData

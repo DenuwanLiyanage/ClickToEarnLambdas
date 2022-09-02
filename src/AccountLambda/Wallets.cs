@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Amazon.DynamoDBv2.DataModel;
 
-namespace HelloWorld;
+namespace AccountLambda;
 
 [DynamoDBTable("wallets-table")]
 public class Wallets
