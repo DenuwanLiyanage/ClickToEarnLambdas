@@ -52,16 +52,30 @@ public class AccountFunctions : ICountFunctions
 
     public async Task AddNewWalletToAccountAsync(string id, string walletAddress)
     {
-        var walletsFromTable = await _contextDb.LoadAsync<Wallets>(id);
-        walletsFromTable.wallets.Add(walletAddress);
-        await _contextDb.SaveAsync(walletsFromTable);
-
         var verificationDetails = new WalletsVerificationData
         {
             userId = id,
             wallet = walletAddress,
             isVerified = false
         };
+
+        var walletsFromTable = await _contextDb.LoadAsync<Wallets>(id);
+        if (walletsFromTable == null)
+        {
+            walletsFromTable = new Wallets
+            {
+                userId = id,
+                wallets = new List<string> { walletAddress }
+            };
+            await _contextDb.SaveAsync(walletsFromTable);
+            await SaveNewWalletWithVerificationDetailsAsync(verificationDetails);
+            return;
+        }
+
+        walletsFromTable.wallets.Add(walletAddress);
+        await _contextDb.SaveAsync(walletsFromTable);
+
+
         await SaveNewWalletWithVerificationDetailsAsync(verificationDetails);
     }
 
